@@ -1,0 +1,6 @@
+[submodule "qutip"]
+	path = qutip
+	url = https://github.com/julianiacoponi/qutip.git
+[submodule "GPyOpt"]
+	path = GPyOpt
+	url = https://github.com/julianiacoponi/GPyOpt.git
