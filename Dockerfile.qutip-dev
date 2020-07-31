@@ -1,0 +1,2 @@
+FROM ubuntu-focal-python38
+RUN pip3 install numpy scipy cython pytest pytest-cov matplotlib
