@@ -3,6 +3,16 @@ FROM python:3
 RUN python -m venv /venv
 ENV PATH="/venv/bin:${PATH}"
 WORKDIR /qcbo
+
+ADD GPyOpt/requirements.txt /qcbo/requirements.txt
+RUN pip3 install -r /qcbo/requirements.txt && pip3 check
+ADD ./GPyOpt /qcbo/GPyOpt
+WORKDIR /qcbo/GPyOpt
+# this runs `python setup.py develop`
+RUN /venv/bin/pip3 install -e .
+RUN rm /qcbo/requirements.txt
+
+# this requirements is more than just the basic qutip one, includes ipython too.
 ADD requirements.txt /qcbo/requirements.txt
 RUN pip3 install -r /qcbo/requirements.txt && pip3 check
 ADD ./qutip /qcbo/qutip
@@ -13,3 +23,4 @@ WORKDIR /qcbo/qutip
 # so maybe it uses it by default?
 RUN /venv/bin/pip3 install -e .
 RUN rm /qcbo/requirements.txt
+WORKDIR /qcbo

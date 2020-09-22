@@ -1,0 +1,12 @@
+FROM ubuntu:focal-20200720
+FROM python:3
+RUN python -m venv /venv
+ENV PATH="/venv/bin:${PATH}"
+WORKDIR /qcbo
+ADD GPyOpt/requirements.txt /qcbo/requirements.txt
+RUN pip3 install -r /qcbo/requirements.txt && pip3 check
+ADD ./GPyOpt /qcbo/GPyOpt
+WORKDIR /qcbo/GPyOpt
+# this runs `python setup.py develop`
+RUN /venv/bin/pip3 install -e .
+RUN rm /qcbo/requirements.txt

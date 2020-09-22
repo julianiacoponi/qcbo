@@ -1,0 +1,8 @@
+numpy
+scipy
+cython
+pytest
+pytest-cov
+matplotlib
+ipython[terminal]==7.9.0
+readline
