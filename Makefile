@@ -31,21 +31,21 @@ push-%:
 
 qutip-dev: export_version
 	@echo  $(call green,"Launch qutip-dev image")
-	docker build --tag=qutip-dev -f Dockerfile.qutip-dev .
+	docker build --tag=qutip-dev -f dockerfiles/Dockerfile.qutip-dev .
 	@# touch the file so that docker doesn't make a directory for it
 	@touch $(shell pwd)/.dev-image-history
-	docker run -it -v $(shell pwd):/qcbo/ -v $(shell pwd)/.dev-image-history:/root/.bash_history --entrypoint=/bin/bash qutip-dev
+	docker run -it -v $(shell pwd)/qutip:/qutip/ -v $(shell pwd)/.dev-image-history:/root/.bash_history --entrypoint=/bin/bash qutip-dev
 
 gpyopt-dev: export_version
 	@echo  $(call green,"Launch gpyopt-dev image")
-	docker build --tag=gpyopt-dev -f Dockerfile.gpyopt-dev .
+	docker build --tag=gpyopt-dev -f dockerfiles/Dockerfile.gpyopt-dev .
 	@# touch the file so that docker doesn't make a directory for it
 	@touch $(shell pwd)/.dev-image-history
-	docker run -it -v $(shell pwd):/qcbo/ -v $(shell pwd)/.dev-image-history:/root/.bash_history --entrypoint=/bin/bash gpyopt-dev
+	docker run -it -v $(shell pwd)/GPyOpt:/GPyOpt/ -v $(shell pwd)/.dev-image-history:/root/.bash_history --entrypoint=/bin/bash gpyopt-dev
 
 qcbo-dev: export_version
 	@echo  $(call green,"Launch qcbo-dev image")
-	docker build --tag=qcbo-dev -f Dockerfile.qcbo-dev .
+	docker build --tag=qcbo-dev -f dockerfiles/Dockerfile.qcbo-dev .
 	@# touch the file so that docker doesn't make a directory for it
 	@touch $(shell pwd)/.dev-image-history
 	docker run -it -v $(shell pwd):/qcbo/ -v $(shell pwd)/.dev-image-history:/root/.bash_history --entrypoint=/bin/bash qcbo-dev

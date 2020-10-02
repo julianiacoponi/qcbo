@@ -8,6 +8,7 @@ import numpy as np
 
 # 2x2 identity matrix
 I = np.eye(2)
+I8 = np.eye(8)
 
 # Pauli matrices
 sx = np.array([[0, 1], [1, 0]])
@@ -55,7 +56,7 @@ def S_func(k):
 
 def P_func(k):
     ''' measurement probability '''
-    return (S_func(k) + I) / 2
+    return (S_func(k) + I8) / 2
 
 
 def Fidelity(rho=None):
@@ -70,8 +71,9 @@ def Fidelity(rho=None):
 def Fidelity_in_terms_of_measurement_probablity(rho=None):
     if rho is None:
         rho = triple_0
-    # TODO !!!
-
+    positive_contributions = [np.trace(rho * P_func(k)) for k in range(1, 5)]
+    negative_contributions = [np.trace(rho * P_func(k)) for k in range(5, 8)]
+    return 1 / 4 * (np.sum(positive_contributions) - np.sum(negative_contributions))
 
 if __name__ == '__main__':
     max_k = 7
@@ -82,3 +84,5 @@ if __name__ == '__main__':
 
     print('Fidelity for rho=|000> =', Fidelity())
     print('Fidelity for rho=|111> =', Fidelity(rho=triple_1))
+    print('Fidelity (in terms of p) for rho=|000> =', Fidelity_in_terms_of_measurement_probablity())
+    print('Fidelity (in terms of p) for rho=|111> =', Fidelity_in_terms_of_measurement_probablity(rho=triple_1))

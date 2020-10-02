@@ -11,6 +11,7 @@ np.random.seed(28)
 
 # TODO: unsure how (or whether) to `add_measurement` to these circuits... probably?
 
+
 def create_IBM_GHZ_circuit():
     '''
     create the circuit found at
@@ -31,17 +32,29 @@ def create_IBM_GHZ_circuit():
 
     return qubit_circuit
 
+
+def get_random_angles(n):
+    ''' create n random angles '''
+    return np.random.uniform(0, 2 * np.pi, n)
+
+
 def create_fig_3_GHZ_circuit(phis=None):
     '''
     create the circuit in Fig. 3 of
     https://arxiv.org/pdf/1909.01229.pdf
     '''
     if phis is None:
-        phis = np.random.uniform(0, 2 * np.pi, 6)
+        phis = get_random_angles(6)
+
+    # this is to handle the input phis when using GPyOpt which are a 2d array of dimensions 1,6
+    if getattr(phis, 'shape'):
+        if phis.shape[0] == 1:
+            phis = phis[0]
 
     qubit_circuit = QubitCircuit(3, input_states=INPUT_STATES)
 
     print('phis = ', phis)
+    print('phis (in degrees) = ', [round(phi * (180 / np.pi), 1) for phi in phis])
 
     qubit_circuit.add_gate('RX', targets=0, arg_value=phis[0])
     qubit_circuit.add_gate('RX', targets=1, arg_value=phis[1])
@@ -56,10 +69,12 @@ def create_fig_3_GHZ_circuit(phis=None):
 
     return qubit_circuit
 
+
 def run_qubit_circuit(qubit_circuit):
     ''' run the given qubit circuit '''
     operator_matrix_list = qubit_circuit.propagators()
     return gate_sequence_product(operator_matrix_list)
+
 
 if __name__ == '__main__':
     print('Running IBM Tutorial GHZ circuit ====================================')
