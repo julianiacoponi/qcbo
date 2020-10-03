@@ -49,3 +49,5 @@ qcbo-dev: export_version
 	@# touch the file so that docker doesn't make a directory for it
 	@touch $(shell pwd)/.dev-image-history
 	docker run -it -v $(shell pwd):/qcbo/ -v $(shell pwd)/.dev-image-history:/root/.bash_history --entrypoint=/bin/bash qcbo-dev
+
+# TODO: figure out how to get qutip and GPyOpt to be importable in scripts and in iPython?

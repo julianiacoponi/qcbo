@@ -53,8 +53,8 @@ def create_fig_3_GHZ_circuit(phis=None):
 
     qubit_circuit = QubitCircuit(3, input_states=INPUT_STATES)
 
-    print('phis = ', phis)
-    print('phis (in degrees) = ', [round(phi * (180 / np.pi), 1) for phi in phis])
+    # don't print when doing large numbers of iterations
+    # print('phis (in degrees) = ', [round(phi * (180 / np.pi), 1) for phi in phis])
 
     qubit_circuit.add_gate('RX', targets=0, arg_value=phis[0])
     qubit_circuit.add_gate('RX', targets=1, arg_value=phis[1])
