@@ -1,5 +1,7 @@
 FROM ubuntu:focal-20200720
 FROM python:3
+# FROM quantumlib/cirq:latest
+
 RUN python -m venv /venv
 ENV PATH="/venv/bin:${PATH}"
 WORKDIR /qcbo
@@ -22,5 +24,6 @@ WORKDIR /qcbo/qutip
 # `import qutip` in python/ipython shows a 'Calibrating OPENMP threshold...' message
 # so maybe it uses it by default?
 RUN /venv/bin/pip3 install -e .
+
 RUN rm /qcbo/requirements.txt
 WORKDIR /qcbo
