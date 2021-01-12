@@ -1,6 +1,5 @@
 FROM ubuntu:focal-20200720
 FROM python:3
-# FROM quantumlib/cirq:latest
 
 RUN python -m venv /venv
 ENV PATH="/venv/bin:${PATH}"

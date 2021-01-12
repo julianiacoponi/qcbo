@@ -1,4 +1,4 @@
-# Makefile for qutip-bo
+# Makefile for qutip with GPyOpt, also cirq
 
 redb = "\033[1;31m"$1"\033[0m"
 greenb = "\033[1;32m"$1"\033[0m"
@@ -18,11 +18,6 @@ pull-%:
 export_version:
 	@echo "__version__ = '$(VERSION)'" > qutip/__init__.py
 	@echo $(VERSION) > .VERSION
-
-qutip: export_version
-	docker build --tag=${DOCKERHUB_ORGANISATION}/$@:$(VERSION) -f dockerfiles/Dockerfile.qutip-bo .
-	docker tag ${DOCKERHUB_ORGANISATION}/$@:${VERSION} $@
-	docker tag ${DOCKERHUB_ORGANISATION}/$@:${VERSION} ${DOCKERHUB_ORGANISATION}/$@
 
 push-%:
 	docker tag $(DOCKERHUB_ORGANISATION)/$*:$(VERSION) $(DOCKERHUB_ORGANISATION)/$*:latest

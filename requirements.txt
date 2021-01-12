@@ -4,9 +4,7 @@ cython
 pytest
 pytest-cov
 matplotlib
-ipython[terminal]==7.9.0
+ipython[terminal]
 readline
 cma
 qiskit
-qiskit[visualisation]
-
