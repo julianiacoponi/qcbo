@@ -14,10 +14,13 @@ You should now be in a Docker container with `qutip` and `GPyOpt` code setup for
 `qiskit` is also installed, although their is no editable code mounted here. Judging from their
 [installation instructions](https://qiskit.org/documentation/contributing_to_qiskit.html#install-install-from-source-label), they're in dire need of a Dockerfile...
 
+___
 ### Scripts
 #### calculate_fidelity.py
 e.g. 1)
+
 `python circuit_calculations/calculate_fidelity.py --angles 0.5 0 0 0 0 0 --with_qiskit --ghz`
+
 This will calculate the fidelity of the state produced by:
 ```
              ┌─────────┐          ┌───────┐
@@ -30,7 +33,9 @@ This will calculate the fidelity of the state produced by:
 ```
 
 e.g. 2)
+
 `python circuit_calculations/calculate_fidelity.py --angles 0 60 90 120 180 240 270 300 --units degrees --permute --bell`
+
 This will iterate through all 8^4 = 4096 permutations of the 4 angles provided for a quantum circuit comprised of rotation and control gates, returning information on the output state's fidelity to the Bell state.
 
 e.g. a perfect fidelity state is given by
